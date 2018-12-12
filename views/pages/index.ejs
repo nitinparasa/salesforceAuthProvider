@@ -8,7 +8,27 @@
 
   <% include ../partials/nav.ejs %>
 
-  <a href="https://login.salesforce.com/services/oauth2/authorize?response_type=code&client_id=3MVG9YDQS5WtC11qkyOS6M6DQY99CEesL6Mdf0xzUGG8bD8o0a4CCnkxZjn4ut5cd4o9mjihGRubfypmGyEGj&redirect_uri=https://salesforceauthmock.herokuapp.com/">Login with Salesforce</a>
+  <div class="contianer">
+    <div class="row">
+      <div class="col-md-12 text-center">
+          <a class="btn btn-primary" id="salesforceLoginBtn">Login with Salesforce</a>
+      </div>
+    </div>
+  </div>
+  <script>
+      const options = {
+        method: 'GET',
+        mode: 'no-cors', // allow cross-origin HTTP request
+      };
 
+      var salesforceBtn = document.getElementById('salesforceLoginBtn');
+
+      salesforceBtn.addEventListener('click', () => {
+        const authCodeResponse = fetch('https://login.salesforce.com/services/oauth2/authorize?response_type=code&client_id=3MVG9YDQS5WtC11qkyOS6M6DQY99CEesL6Mdf0xzUGG8bD8o0a4CCnkxZjn4ut5cd4o9mjihGRubfypmGyEGj&redirect_uri=https://salesforceauthmock.herokuapp.com/',options)
+        .then(data => console.log(data))
+        .catch(err => console.log(err));
+      });
+      
+  </script>
 </body>
 </html>
