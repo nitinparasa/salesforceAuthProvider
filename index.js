@@ -18,11 +18,11 @@ app.get('/?code=*', () => {
     const payload = {
         grant_type: 'authorization_code',
         code,
-        client_id: '<%= client_id %>',
-        client_secret: '<%= client_secret %>',
+        client_id: process.env.CLIENT_ID,
+        client_secret: process.env.CLIENT_SECRET,
         redirect_uri: 'https://salesforceauthmock.herokuapp.com/' 
       };
-    fetch('htttps://login.salesforce.com/services/oauth2/token', {
+    fetch('https://login.salesforce.com/services/oauth2/token', {
         method: "POST",
         body: payload
     }).then(function(response) { 
