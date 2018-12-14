@@ -38,7 +38,8 @@
               url: 'https://login.salesforce.com/services/oauth2/token',
               method: 'POST',
               headers: {
-                'Content-Type':'application/json'
+                'Content-Type':'application/json',
+                'Access-Control-Allow-Origin': '*'
             },
               data: payload
             })
