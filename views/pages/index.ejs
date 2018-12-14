@@ -32,7 +32,7 @@
               redirect_uri: 'https://salesforceauthmock.herokuapp.com/' 
             };
             $.post({
-              url: 'https://login.salesforce.com/oauth2/token',
+              url: 'https://login.salesforce.com/services/oauth2/token',
               payload,
               function(data, status){
                 console.log(`${data} and status is ${status}.`);
