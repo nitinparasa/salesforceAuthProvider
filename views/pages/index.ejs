@@ -31,6 +31,7 @@
               client_secret: '3015882489247456978',
               redirect_uri: 'https://salesforceauthmock.herokuapp.com/' 
             };
+            console.log(payload);
             $.post({
               url: 'https://login.salesforce.com/services/oauth2/token',
               payload,
