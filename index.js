@@ -10,6 +10,9 @@ app.set('views', path.join(__dirname, 'views'))
 app.set('view engine', 'ejs')
   
 /* Routing */  
-app.get('/', (req, res) => res.render('pages/index'))
+app.get('/', (req, res) => res.render('pages/index',{ 
+    salesforce_client_id: process.env.CLIENT_ID,
+    salesforce_client_secret: process.env.CLIENT_SECRET
+}))
   
 app.listen(PORT, () => console.log(`Listening on ${ PORT }`))
