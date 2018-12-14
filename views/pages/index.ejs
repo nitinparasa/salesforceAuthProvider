@@ -11,23 +11,24 @@
   <div class="contianer">
     <div class="row">
       <div class="col-md-12 text-center">
-          <a class="btn btn-primary" id="salesforceLoginBtn">Login with Salesforce</a>
+          <a class="btn btn-primary" href="https://login.salesforce.com/services/oauth2/authorize?response_type=code&client_id=3MVG9YDQS5WtC11qkyOS6M6DQY99CEesL6Mdf0xzUGG8bD8o0a4CCnkxZjn4ut5cd4o9mjihGRubfypmGyEGj&redirect_uri=https://salesforceauthmock.herokuapp.com/" id="salesforceLoginBtn">Login with Salesforce</a>
+          <!--<a class="salesforceLoginBtn" href="http://localhost:5000/?response_type=code">Redirect to another link</a>-->
       </div>
     </div>
   </div>
   <script>
-      const options = {
-        method: 'GET',
-        mode: 'no-cors', // allow cross-origin HTTP request,
-        redirect: "follow",
-      };
 
-      var salesforceBtn = document.getElementById('salesforceLoginBtn');
-
-      salesforceBtn.addEventListener('click', () => {
-        const authCodeResponse = fetch('https://login.salesforce.com/services/oauth2/authorize?response_type=code&client_id=3MVG9YDQS5WtC11qkyOS6M6DQY99CEesL6Mdf0xzUGG8bD8o0a4CCnkxZjn4ut5cd4o9mjihGRubfypmGyEGj&redirect_uri=https://salesforceauthmock.herokuapp.com/',options)
-        .then(data => console.log(data))
-        .catch(err => console.log(err));
+      $(document).ready(function(e){
+        let currentHref = parent.window.location.href;
+        console.log(currentHref);
+        if(currentHref !== undefined){
+          if(currentHref.includes('code')){
+            const authorizationCode = currentHref.slice(currentHref.indexOf('=')+1);
+            console.log(authorizationCode);
+          } 
+        }
+      }, function(e){
+        console.log(this.href);
       });
       
   </script>
