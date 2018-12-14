@@ -21,7 +21,7 @@
   <% let client_secret = salesforce_client_secret %>
   <script>
 
-      $(document).ready(function(e){
+      /*$(document).ready(function(e){
         let currentHref = parent.window.location.href;
         console.log(currentHref);
         if(currentHref !== undefined){
@@ -34,24 +34,10 @@
               client_secret: '<%= client_secret %>',
               redirect_uri: 'https://salesforceauthmock.herokuapp.com/' 
             };
-            $.ajax({
-              url: "https://login.salesforce.com/services/oauth2/token",
-              method: "POST",
-              headers: {
-                'Content-Type':'application/json',
-                'Access-Control-Allow-Headers': '*'
-              },
-              crossDomain: true,
-              cache: false,
-              data: payload,
-              dataType: "json"
-            })
-            .done(function(response){
-              console.log(response);
-            })
+            $.post('htttps://login.salesforce.com/services/oauth2/token', payload).done(function(response){ console.log(response);});
           } 
         }
-      });
+      }); */
     
   </script>
 </body>
