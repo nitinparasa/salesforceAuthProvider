@@ -37,6 +37,9 @@
             $.ajax({
               url: 'https://login.salesforce.com/services/oauth2/token',
               method: 'POST',
+              headers: {
+                'Content-Type':'application/json'
+            },
               data: payload
             })
             .done(function(data){
