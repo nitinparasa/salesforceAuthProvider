@@ -40,14 +40,16 @@
               headers: {
                 'Content-Type':'application/json',
                 'Access-Control-Allow-Origin': '*'
-            },
-              data: payload
-            })
-            .done(function(data){
-              console.log('Success Data: '+data);
-            })
-            .fail(function(data){
-              console.log('Failure Data: '+data);
+              },
+              crossDomain: true,
+              data: payload,
+              success: function (response) {
+                var resp = JSON.parse(response)
+                alert(resp.status);
+              },
+              error: function (xhr, status) {
+                alert("error");
+              }
             })
           } 
         }
