@@ -23,8 +23,21 @@
         console.log(currentHref);
         if(currentHref !== undefined){
           if(currentHref.includes('code')){
-            const authorizationCode = currentHref.slice(currentHref.indexOf('=')+1);
-            console.log(authorizationCode);
+            const code = decodeURIComponent(currentHref.slice(currentHref.indexOf('=')+1));
+            const payload = {
+              grant_type: 'authorization_code',
+              code,
+              client_id: '3MVG9YDQS5WtC11qkyOS6M6DQY99CEesL6Mdf0xzUGG8bD8o0a4CCnkxZjn4ut5cd4o9mjihGRubfypmGyEGj',
+              client_secret: '3015882489247456978',
+              redirect_uri: 'https://salesforceauthmock.herokuapp.com/' 
+            };
+            $.post({
+              url: 'https://login.salesforce.com/oauth2/token',
+              payload,
+              function(data, status){
+                console.log(`${data} and status is ${status}.`);
+              }
+            })
           } 
         }
       }, function(e){
