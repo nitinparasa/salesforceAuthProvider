@@ -21,7 +21,7 @@
   <% let client_secret = salesforce_client_secret %>
   <script>
 
-      $(document).ready(function(e){
+      /*$(document).ready(function(e){
         let currentHref = parent.window.location.href;
         console.log(currentHref);
         if(currentHref !== undefined){
@@ -43,7 +43,6 @@
               },
               crossDomain: true,
               cache: false,
-              dataType: "jsonp",
               data: payload
             })
             .done(function(response){
@@ -51,10 +50,8 @@
             })
           } 
         }
-      }, function(e){
-        console.log(this.href);
       });
-      
+      */
   </script>
 </body>
 </html>
