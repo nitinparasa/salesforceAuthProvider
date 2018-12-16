@@ -42,7 +42,11 @@
               },
               dataType: 'json',
               data: payload
-            }).done(function(response){ // business logic });
+            })
+            .done(function(response){ 
+              const { access_token, instance_url, token_type } = response; 
+              console.log(access_token,instance_url, token_type);
+            });
           } 
         }
       }); 
