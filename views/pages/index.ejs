@@ -38,13 +38,10 @@
               url: 'https://login.salesforce.com/services/oauth2/token',
               method: 'POST', 
               crossdomain: true,
-              beforeSend: function(xhr){
-                xhr.setRequestHeader('Access-Control-Allow-origin', 'true');
-              },
               headers: {
                 "Content-Type":"application/x-www-form-urlencoded",
               },
-              dataType: 'json',
+              dataType: 'jsonp',
               data: payload
             })
             .done(function(response){ 
