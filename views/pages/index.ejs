@@ -13,13 +13,14 @@
       <div class="col-md-12 text-center ">
           <a id="salesforceLoginBtn" class="btn btn-primary" href="https://login.salesforce.com/services/oauth2/authorize?response_type=code&client_id=3MVG9YDQS5WtC11qkyOS6M6DQY99CEesL6Mdf0xzUGG8bD8o0a4CCnkxZjn4ut5cd4o9mjihGRubfypmGyEGj&redirect_uri=https://salesforceauthmock.herokuapp.com/" id="salesforceLoginBtn">Login with Salesforce</a>
           <h3 id="username">Nitin Parasa</h3>
-          <p class="text-muted" id="salesforceUserId"> <%= data %></p>
+          <p class="text-muted" id="salesforceUserData"></p>
       </div>
     </div>
   </div>
   <!-- eJS varibales -->
   <% let client_id = salesforce_client_id %>
   <% let client_secret = salesforce_client_secret %>
+  <% let userdData = data %>
   <script>
 
       $(document).ready(function(e){
@@ -35,22 +36,6 @@
               client_secret: '<%= client_secret %>',
               redirect_uri: 'https://salesforceauthmock.herokuapp.com/' 
             };
-
-            /*let request = new XMLHttpRequest();
-            //const proxyUrl = 'https://cors-anywhere.herokuapp.com'; 
-            request.open('POST','https://login.salesforce.com/services/oauth2/token', true);
-            request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-            request.setRequestHeader('Accept', 'application/json');
-            //request.setRequestHeader('Access-Control-Allow-Origin', '*');
-            request.onreadystatechange = (response) => {
-              console.log(request.readyState, '@@@@', request.status);
-              if(request.status === 200){
-                console.log(request.responseText);
-              }
-            }; 
-
-            request.send(payload); */
-
             $.ajax({
               url: 'https://login.salesforce.com/services/oauth2/token',
               method: 'POST', 
@@ -81,9 +66,13 @@
               .done(function(response){
                 console.log('User details',response);
                 window.location.href = 'https://salesforceauthmock.herokuapp.com/success?data='+response;
+
               });
             });
-          } 
+          } else if(currentHref.includes('data')){
+            document.querySelector('#salesforceLoginBtn').style.display = 'none';
+            document.querySelector('#salesforceUserData').innerText = (userData !== undefined) ? userData: '';
+          }
         }
       }); 
     

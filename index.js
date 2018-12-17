@@ -21,7 +21,7 @@ app.get('/', (req, res) => {
 app.get('/success', (req, res) => {
     const data = req.query.data;
     res.render('pages/index', {
-        data
+        data: data
     });
 });
 // app.all('/', (req,res,next) => {
