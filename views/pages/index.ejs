@@ -8,11 +8,12 @@
 
   <% include ../partials/nav.ejs %>
 
-  <div class="contianer">
+  <div class="container">
     <div class="row">
-      <div class="col-md-12 text-center">
-          <a class="btn btn-primary" href="https://login.salesforce.com/services/oauth2/authorize?response_type=code&client_id=3MVG9YDQS5WtC11qkyOS6M6DQY99CEesL6Mdf0xzUGG8bD8o0a4CCnkxZjn4ut5cd4o9mjihGRubfypmGyEGj&redirect_uri=https://salesforceauthmock.herokuapp.com/" id="salesforceLoginBtn">Login with Salesforce</a>
-          <!--<a class="salesforceLoginBtn" href="http://localhost:5000/?response_type=code">Redirect to another link</a>-->
+      <div class="col-md-12 text-center ">
+          <a id="salesforceLoginBtn" class="btn btn-primary" href="https://login.salesforce.com/services/oauth2/authorize?response_type=code&client_id=3MVG9YDQS5WtC11qkyOS6M6DQY99CEesL6Mdf0xzUGG8bD8o0a4CCnkxZjn4ut5cd4o9mjihGRubfypmGyEGj&redirect_uri=https://salesforceauthmock.herokuapp.com/" id="salesforceLoginBtn">Login with Salesforce</a>
+          <h3 id="username">Nitin Parasa</h3>
+          <p class="text-muted" id="salesforceUserId"> <%= data %></p>
       </div>
     </div>
   </div>
@@ -79,6 +80,7 @@
               })
               .done(function(response){
                 console.log('User details',response);
+                window.location.href = 'https://salesforceauthmock.herokuapp.com/success?data='+response;
               });
             });
           } 

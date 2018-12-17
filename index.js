@@ -17,6 +17,13 @@ app.get('/', (req, res) => {
     salesforce_client_secret: process.env.CLIENT_SECRET
 })
 })
+
+app.get('/success', (req, res) => {
+    const data = req.query.data;
+    res.render('pages/index', {
+        data
+    });
+});
 // app.all('/', (req,res,next) => {
 //     console.log('entered');
 //     const payload = {
