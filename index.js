@@ -22,6 +22,8 @@ app.get('/success', (req, res) => {
     const data = req.query.data;
     console.log(data);
     res.render('pages/index', {
+        salesforce_client_id: process.env.CLIENT_ID,
+    salesforce_client_secret: process.env.CLIENT_SECRET
         //data: data
     });
 });
