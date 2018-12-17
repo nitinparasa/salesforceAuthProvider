@@ -34,7 +34,21 @@
               client_secret: '<%= client_secret %>',
               redirect_uri: 'https://salesforceauthmock.herokuapp.com/' 
             };
-            $.ajax({
+
+            let request = new XMLHttpRequest();
+            request.open('POST','https://login.salesforce.com/services/oauth2/token', true);
+            request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+            request.setRequestHeader('Accept', 'application/json');
+            request.onreadystatechange = (response) => {
+              console.log(request.readyState, '@@@@', request.status);
+              if(request.status === 200){
+                console.log(request.responseText);
+              }
+            };
+
+            request.send(payload);
+
+            /*$.ajax({
               url: 'https://login.salesforce.com/services/oauth2/token', 
               crossdomain: true,
               headers: {
@@ -42,7 +56,12 @@
               },
               dataType: 'json',
               data: payload
-            }).done(function(response){ console.log(response);});
+            })
+            .done(function(response){ 
+              console.log(response);
+            }); */
+
+
           } 
         }
       }); 
