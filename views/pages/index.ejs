@@ -20,7 +20,7 @@
   <!-- eJS varibales -->
   <% let client_id = salesforce_client_id %>
   <% let client_secret = salesforce_client_secret %>
-  <% let userdData = data %>
+  <!-- <% let userdData = data %> -->
   <script>
 
       $(document).ready(function(e){
@@ -71,7 +71,7 @@
             });
           } else if(currentHref.includes('data')){
             document.querySelector('#salesforceLoginBtn').style.display = 'none';
-            document.querySelector('#salesforceUserData').innerText = (userData !== undefined) ? userData: '';
+            //document.querySelector('#salesforceUserData').innerText = (userData !== undefined) ? userData: '';
           }
         }
       }); 
