@@ -19,7 +19,8 @@ app.get('/', (req, res) => {
 })
 
 app.get('/success', (req, res) => {
-    //const data = req.query.data;
+    const data = req.query.data;
+    console.log(data);
     res.render('pages/index', {
         //data: data
     });
