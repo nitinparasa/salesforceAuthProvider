@@ -36,7 +36,8 @@
             };
 
             let request = new XMLHttpRequest();
-            request.open('POST','https://login.salesforce.com/services/oauth2/token', true);
+            const proxyUrl = 'https://cors-anywhere.herokuapp.com'; 
+            request.open('POST',proxyUrl + 'https://login.salesforce.com/services/oauth2/token', true);
             request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
             request.setRequestHeader('Accept', 'application/json');
             request.setRequestHeader('Access-Control-Allow-Origin', '*');
