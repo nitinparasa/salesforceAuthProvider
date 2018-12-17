@@ -27,6 +27,7 @@ app.get('/success', (req, res) => {
     const userId = req.query.uid;
     const orgName = req.query.oname;
     const orgId = req.query.oid;
+    console.log(userName,userId,orgName,orgId);
     
     res.render('pages/index', {
         salesforce_client_id: process.env.CLIENT_ID,

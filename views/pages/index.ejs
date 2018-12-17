@@ -70,7 +70,7 @@
               })
               .done(function(response){
                 console.log('User details',response);
-                window.location.href = 'https://salesforceauthmock.herokuapp.com/success?uname='+response.Salesforce_User_Name+'uid='+response.Salesforce_User_Id;
+                window.location.href = 'https://salesforceauthmock.herokuapp.com/success?uname='+response.Salesforce_User_Name+'uid='+response.Salesforce_User_Id+'oname='+response.Org_Name+'oid='+response.Org_Id;
 
               });
             });
