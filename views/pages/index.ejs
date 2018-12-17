@@ -76,10 +76,10 @@
             });
           } else if(currentHref.includes('uname')){
             document.querySelector('#salesforceLoginBtn').style.display = 'none';
-            document.querySelector('#salesforceUsername').innerText = (sfUname !== undefined) ? sfUname: '';
-            document.querySelector('#salesforceUserId').innerText = (sfUId !== undefined) ? sfUId: '';
-            document.querySelector('#salesforceOrgName').innerText = (sfOrgName !== undefined) ? sfOrgName: '';
-            document.querySelector('#salesforceOrgId').innerText = (sfOrgId !== undefined) ? sfOrgId: '';
+            document.querySelector('#salesforceUsername').innerText = ('<%= sfUname %>' !== undefined) ? '<%= sfUname %>': '';
+            document.querySelector('#salesforceUserId').innerText = ('<%= sfUId %>' !== undefined) ? '<%= sfUId %>': '';
+            document.querySelector('#salesforceOrgName').innerText = ('<%= sfOrgName %>' !== undefined) ? '<%= sfOrgName %>': '';
+            document.querySelector('#salesforceOrgId').innerText = ('<%= sfOrgId %>' !== undefined) ? '<%= sfOrgId %>': '';
           }
         }
       }); 
