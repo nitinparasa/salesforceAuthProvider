@@ -12,8 +12,10 @@
     <div class="row">
       <div class="col-md-12 text-center ">
           <a id="salesforceLoginBtn" class="btn btn-primary" href="https://login.salesforce.com/services/oauth2/authorize?response_type=code&client_id=3MVG9YDQS5WtC11qkyOS6M6DQY99CEesL6Mdf0xzUGG8bD8o0a4CCnkxZjn4ut5cd4o9mjihGRubfypmGyEGj&redirect_uri=https://salesforceauthmock.herokuapp.com/" id="salesforceLoginBtn">Login with Salesforce</a>
-          <h3 id="salesforceUsername">Nitin Parasa</h3>
+          <h3 id="salesforceUsername"></h3>
           <p class="text-muted" id="salesforceUserId"></p>
+          <h3 id="salesforceOrgName"></h3>
+          <p class="text-muted" id="salesforceOrgId"></p>
       </div>
     </div>
   </div>
@@ -74,7 +76,10 @@
             });
           } else if(currentHref.includes('data')){
             document.querySelector('#salesforceLoginBtn').style.display = 'none';
-            document.querySelector('#salesforceUsername').innerText = (salesforce_user_name !== undefined) ? salesforce_user_name: '';
+            document.querySelector('#salesforceUsername').innerText = (sfUname !== undefined) ? sfUname: '';
+            document.querySelector('#salesforceUserId').innerText = (sfUId !== undefined) ? sfUId: '';
+            document.querySelector('#salesforceOrgName').innerText = (sfOrgName !== undefined) ? sfOrgName: '';
+            document.querySelector('#salesforceOrgId').innerText = (sfOrgId !== undefined) ? sfOrgId: '';
           }
         }
       }); 
