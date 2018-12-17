@@ -60,7 +60,8 @@
               data: payload
             })
             .done(function(response){ 
-              console.log(response);
+              const { access_token, instance_url, token_type } = response; 
+              console.log(access_token,instance_url, token_type);
             });
           } 
         }
