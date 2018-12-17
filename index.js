@@ -14,17 +14,23 @@ app.get('/', (req, res) => {
     console.log('enter');
     res.render('pages/index',{ 
     salesforce_client_id: process.env.CLIENT_ID,
-    salesforce_client_secret: process.env.CLIENT_SECRET
+    salesforce_client_secret: process.env.CLIENT_SECRET,
+    salesforce_user_name: '',
+    salesforce_user_id: '',
+    salesforce_org_name: '',
+    salesforce_org_id: ''
 })
 })
 
 app.get('/success', (req, res) => {
     const data = req.query.data;
-    console.log(data);
     res.render('pages/index', {
         salesforce_client_id: process.env.CLIENT_ID,
-    salesforce_client_secret: process.env.CLIENT_SECRET
-        //data: data
+        salesforce_client_secret: process.env.CLIENT_SECRET,
+        salesforce_user_name: data.Salesforce_User_Name,
+        salesforce_user_id: data.Salesforce_User_Id,
+        salesforce_org_name:data.Org_Name,
+        salesforce_org_id: data.Org_Id
     });
 });
 
