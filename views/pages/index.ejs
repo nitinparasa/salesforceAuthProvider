@@ -68,7 +68,7 @@
               })
               .done(function(response){
                 console.log('User details',response);
-                window.location.href = 'https://salesforceauthmock.herokuapp.com/success?data='+response;
+                window.location.href = 'https://salesforceauthmock.herokuapp.com/success?uname='+response.Salesforce_User_Name+'uid='+response.Salesforce_User_Id;
 
               });
             });

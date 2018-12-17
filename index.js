@@ -23,13 +23,17 @@ app.get('/', (req, res) => {
 })
 
 app.get('/success', (req, res) => {
-    const data = req.query.data;
+    const userName = req.query.uname;
+    const userId = req.query.uid;
+    const data = {
+        a:1
+    };
     console.log(data.Salesforce_User_Name);
     res.render('pages/index', {
         salesforce_client_id: process.env.CLIENT_ID,
         salesforce_client_secret: process.env.CLIENT_SECRET,
-        salesforce_user_name: data.Salesforce_User_Name,
-        salesforce_user_id: data.Salesforce_User_Id,
+        salesforce_user_name: userName,
+        salesforce_user_id: userId,
         salesforce_org_name:data.Org_Name,
         salesforce_org_id: data.Org_Id
     });
