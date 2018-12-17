@@ -61,8 +61,24 @@
               data: payload
             })
             .done(function(response){ 
-              console.log(response); 
-              console.log(response.access_token, response.instance_url, response.token_type);
+              //console.log(response); 
+              const accessToken = response.accessToken;
+              const refreshToken = response.refreshToken;
+              
+              const authorizationHeader = 'Bearer' + accessToken;
+              // make another request to fetch the org and user id
+              $.ajax({
+                url: 'https://login.salesforce.com/services/apexrest/organduserdetails',
+                method: 'GET', 
+                headers: {
+                  "Authorization": authorizationHeader
+                },
+                crossdomain: true,
+                dataType: 'json'
+              })
+              .done(function(response){
+                console.log('User details',response);
+              });
             });
           } 
         }
