@@ -69,7 +69,7 @@
               const authorizationHeader = 'Bearer ' + accessToken;
               // make another request to fetch the org and user id
               $.ajax({
-                url: instanceURL+ '/services/apexrest/organduserdetails',
+                url: instanceURL+ '/services/apexrest/organduserdetails/',
                 method: 'GET', 
                 beforeSend: function(xhr){
                   xhr.setRequestHeader('Authorization',authorizationHeader);
