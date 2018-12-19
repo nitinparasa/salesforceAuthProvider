@@ -66,8 +66,11 @@
                 //url: instanceURL+ '/services/apexrest/organduserdetails/',
                 url: userInfoEndPoint,
                 method: 'GET', 
-                beforeSend: function(xhr){
+                /*beforeSend: function(xhr){
                   xhr.setRequestHeader('Authorization',authorizationHeader);
+                },*/
+                headers:{
+                  'Authorization':authorizationHeader
                 },
                 crossdomain: true,
                 dataType: 'json'
