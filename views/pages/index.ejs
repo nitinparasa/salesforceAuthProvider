@@ -53,7 +53,7 @@
               data: payload
             })
             .done(function(response){ 
-              //console.log(response); 
+              console.log(response); 
               const accessToken = response.access_token;
               const refreshToken = response.refresh_token;
               const instanceURL = response.instance_url;
