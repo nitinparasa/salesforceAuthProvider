@@ -62,7 +62,8 @@
               // make another request to fetch the org and user id
               fetch(userInfoEndPoint,{
                 method: 'GET',
-                 
+                withCredentials: true,
+                credentials: 'include',
                 headers: new Headers({
                   'Authorization': 'Bearer ' + accessToken,
                   'Accept': 'application/json'
