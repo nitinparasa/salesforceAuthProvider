@@ -62,20 +62,16 @@
               const authorizationHeader = 'Bearer ' + accessToken;
               console.log('Header is',authorizationHeader);
               // make another request to fetch the org and user id
-              $.ajax({
-                //url: instanceURL+ '/services/apexrest/organduserdetails/',
+              fetch({
                 url: userInfoEndPoint,
                 method: 'GET', 
-                beforeSend: function(xhr){
-                  xhr.setRequestHeader('Authorization',authorizationHeader);
-                },
                 headers:{
                   'Authorization':authorizationHeader
                 },
-                crossdomain: true,
+                mode: 'no-cors',
                 dataType: 'json'
               })
-              .done(function(response){
+              .then(function(response){
                 console.log('User details',response);
                 window.location.href = 'https://salesforceauthmock.herokuapp.com/success?response='+JSON.stringify(response);
 
