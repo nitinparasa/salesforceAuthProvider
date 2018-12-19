@@ -63,14 +63,15 @@
               console.log('Header is',authorizationHeader);
               // make another request to fetch the org and user id
               fetch(userInfoEndPoint,{
-                method: 'GET', 
+                method: 'GET',
+                credentials: 'include', 
                 headers:{
                   'Authorization':authorizationHeader
                 },
                 mode: 'no-cors'
               })
-              .then(function(response){
-                console.log('User details',response);
+              .then((data) => {
+                console.log(JSON.stringify(data));
                 //window.location.href = 'https://salesforceauthmock.herokuapp.com/success?response='+JSON.stringify(response);
 
               });
