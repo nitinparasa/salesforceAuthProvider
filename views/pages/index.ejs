@@ -70,11 +70,10 @@
                 },
                 dataType:"json"
               })
-              .then((data) => {
+              .done((data) => {
                 console.log(JSON.stringify(data));
                 //window.location.href = 'https://salesforceauthmock.herokuapp.com/success?response='+JSON.stringify(response);
               })
-              .catch(err => { console.log(err); });
             });
           } else if(currentHref.includes('successs')){
             document.querySelector('#salesforceLoginBtn').style.display = 'none';
