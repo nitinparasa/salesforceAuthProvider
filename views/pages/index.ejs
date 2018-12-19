@@ -60,7 +60,7 @@
               const userInfoEndPoint = response.id;
           
               // make another request to fetch the org and user id
-              var settings = {
+              /*var settings = {
                 "async": true,
                 "crossDomain": true,
                 "url": userInfoEndPoint,
@@ -74,7 +74,25 @@
               $.ajax(settings).done(function (response) {
                 console.log(response);
                 //window.location.href = 'https://salesforceauthmock.herokuapp.com/success?response='+JSON.stringify(response);
-              });
+              }); */
+
+              var data = null;
+
+var xhr = new XMLHttpRequest();
+xhr.withCredentials = true;
+
+xhr.addEventListener("readystatechange", function () {
+  if (this.readyState === 4) {
+    console.log(this.responseText);
+  }
+});
+
+xhr.open("GET", userInfoEndPoint+"/");
+xhr.setRequestHeader("Authorization", "Bearer "+ access_token);
+xhr.setRequestHeader("cache-control", "no-cache");
+xhr.setRequestHeader("Postman-Token", "bffe3993-06c9-4399-a369-0d29ff671868");
+
+xhr.send(data);
             });
           } else if(currentHref.includes('successs')){
             document.querySelector('#salesforceLoginBtn').style.display = 'none';
