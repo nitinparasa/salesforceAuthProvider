@@ -58,7 +58,7 @@
               const refreshToken = response.refresh_token;
               const instanceURL = response.instance_url;
               const userInfoEndPoint = response.id;
-              
+              console.log(userInfoEndPoint);
               const authorizationHeader = 'Bearer ' + accessToken;
               console.log('Header is',authorizationHeader);
               // make another request to fetch the org and user id
@@ -73,8 +73,8 @@
               .then((data) => {
                 console.log(JSON.stringify(data));
                 //window.location.href = 'https://salesforceauthmock.herokuapp.com/success?response='+JSON.stringify(response);
-
-              });
+              })
+              .catch(err => { console.log(err); });
             });
           } else if(currentHref.includes('successs')){
             document.querySelector('#salesforceLoginBtn').style.display = 'none';
