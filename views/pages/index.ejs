@@ -65,9 +65,9 @@
               fetch(userInfoEndPoint,{
                 method: 'GET',
                 credentials: 'include', 
-                headers:{
+                headers: new Headers({
                   'Authorization':authorizationHeader
-                },
+                }),
                 mode: 'no-cors'
               })
               .then((data) => {
