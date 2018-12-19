@@ -62,24 +62,22 @@
               const authorizationHeader = 'Bearer ' + accessToken;
               console.log('Header is',authorizationHeader);
               // make another request to fetch the org and user id
-              fetch({
-                url: userInfoEndPoint,
+              fetch(userInfoEndPoint,{
                 method: 'GET', 
                 headers:{
                   'Authorization':authorizationHeader
                 },
-                mode: 'no-cors',
-                dataType: 'json'
+                mode: 'no-cors'
               })
               .then(function(response){
                 console.log('User details',response);
-                window.location.href = 'https://salesforceauthmock.herokuapp.com/success?response='+JSON.stringify(response);
+                //window.location.href = 'https://salesforceauthmock.herokuapp.com/success?response='+JSON.stringify(response);
 
               });
             });
           } else if(currentHref.includes('successs')){
             document.querySelector('#salesforceLoginBtn').style.display = 'none';
-            cocument.querySelector('#profilePic').setAttribute('src', '<%= profilePicUrl %>');
+            document.querySelector('#profilePic').setAttribute('src', '<%= profilePicUrl %>');
             document.querySelector('#salesforceUsername').innerText = ('<%= sfUname %>' !== undefined) ? '<%= sfUname %>': '';
             document.querySelector('#salesforceUserId').innerText = ('<%= sfUId %>' !== undefined) ? '<%= sfUId %>': '';
             document.querySelector('#salesforceOrgId').innerText = ('<%= sfOrgId %>' !== undefined) ? '<%= sfOrgId %>': '';
