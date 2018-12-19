@@ -17,24 +17,28 @@ app.get('/', (req, res) => {
     salesforce_client_secret: process.env.CLIENT_SECRET,
     salesforce_user_name: '',
     salesforce_user_id: '',
-    salesforce_org_name: '',
+    //salesforce_org_name: '',
+    salesforce_profilePicURL: '',
     salesforce_org_id: ''
 })
 })
 
 app.get('/success', (req, res) => {
-    const userName = req.query.uname;
-    const userId = req.query.uid;
-    const orgName = req.query.oname;
-    const orgId = req.query.oid;
-    console.log(userName,userId,orgName,orgId);
+    const responseRetrieved = req.query.response;
+    const userName = responseRetrieved.name;
+    const userId = responseRetrieved.user_id;
+    //const orgName = responseRetrieved.;
+    const orgId = responseRetrieved.organization_id;
+    const userPic = responseRetrieved.picture;
+    console.log(userName,userId,orgId);
     
     res.render('pages/index', {
         salesforce_client_id: process.env.CLIENT_ID,
         salesforce_client_secret: process.env.CLIENT_SECRET,
         salesforce_user_name: userName,
         salesforce_user_id: userId,
-        salesforce_org_name: orgName,
+        //salesforce_org_name: orgName,
+        salesforce_profilePicURL: userPic, 
         salesforce_org_id: orgId
     });
 });

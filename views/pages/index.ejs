@@ -12,6 +12,7 @@
     <div class="row">
       <div class="col-md-12 text-center ">
           <a id="salesforceLoginBtn" class="btn btn-primary" href="https://login.salesforce.com/services/oauth2/authorize?response_type=code&client_id=3MVG9YDQS5WtC11qkyOS6M6DQY99CEesL6Mdf0xzUGG8bD8o0a4CCnkxZjn4ut5cd4o9mjihGRubfypmGyEGj&redirect_uri=https://salesforceauthmock.herokuapp.com/" id="salesforceLoginBtn">Login with Salesforce</a>
+          <img width="300px" height="200px" src='' id="profilePic" alt="Profile Picture"/>
           <h3 id="salesforceUsername"></h3>
           <p class="text-muted" id="salesforceUserId"></p>
           <h3 id="salesforceOrgName"></h3>
@@ -24,7 +25,7 @@
   <% let client_secret = salesforce_client_secret %>
   <% let sfUname = salesforce_user_name%>
   <% let sfUId = salesforce_user_id%>
-  <% let sfOrgName = salesforce_org_name %>
+  <% let profilePicUrl = salesforce_profilePicURL %>
   <% let sfOrgId = salesforce_org_id %>
   <script>
 
@@ -56,11 +57,13 @@
               const accessToken = response.access_token;
               const refreshToken = response.refresh_token;
               const instanceURL = response.instance_url;
+              const userInfoEndPoint = response.id;
               
               const authorizationHeader = 'Bearer ' + accessToken;
               // make another request to fetch the org and user id
               $.ajax({
-                url: instanceURL+ '/services/apexrest/organduserdetails/',
+                //url: instanceURL+ '/services/apexrest/organduserdetails/',
+                url: userInfoEndPoint,
                 method: 'GET', 
                 beforeSend: function(xhr){
                   xhr.setRequestHeader('Authorization',authorizationHeader);
@@ -70,15 +73,16 @@
               })
               .done(function(response){
                 console.log('User details',response);
-                window.location.href = 'https://salesforceauthmock.herokuapp.com/success?uname='+response.Salesforce_User_Name+'&uid='+response.Salesforce_User_Id+'&oname='+response.Org_Name+'&oid='+response.Org_Id;
+                window.location.href = 'https://salesforceauthmock.herokuapp.com/success?response='+JSON.stringify(response);
 
               });
             });
-          } else if(currentHref.includes('uname')){
+          } else if(currentHref.includes('success')){
             document.querySelector('#salesforceLoginBtn').style.display = 'none';
+            cocument.querySelector('#profilePic').setAttribute('src', '<%= profilePicUrl %>');
             document.querySelector('#salesforceUsername').innerText = ('<%= sfUname %>' !== undefined) ? '<%= sfUname %>': '';
             document.querySelector('#salesforceUserId').innerText = ('<%= sfUId %>' !== undefined) ? '<%= sfUId %>': '';
-            document.querySelector('#salesforceOrgName').innerText = ('<%= sfOrgName %>' !== undefined) ? '<%= sfOrgName %>': '';
+            //document.querySelector('#salesforceOrgName').innerText = ('<%= sfOrgName %>' !== undefined) ? '<%= sfOrgName %>': '';
             document.querySelector('#salesforceOrgId').innerText = ('<%= sfOrgId %>' !== undefined) ? '<%= sfOrgId %>': '';
           }
         }
