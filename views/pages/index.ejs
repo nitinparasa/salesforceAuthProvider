@@ -60,15 +60,15 @@
               const userInfoEndPoint = response.id;
           
               // make another request to fetch the org and user id
-              fetch(userInfoEndPoint,{
+              $.ajax({
+                url: userInfoEndPoint,
                 method: 'GET',
-                withCredentials: true,
-                credentials: 'include',
-                headers: new Headers({
+                crossdomain: true,
+                headers: {
                   'Authorization': 'Bearer ' + accessToken,
                   'Accept': 'application/json'
-                }),
-                mode: 'no-cors'
+                },
+                dataType="json"
               })
               .then((data) => {
                 console.log(JSON.stringify(data));
