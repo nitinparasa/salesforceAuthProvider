@@ -60,6 +60,7 @@
               const userInfoEndPoint = response.id;
               
               const authorizationHeader = 'Bearer ' + accessToken;
+              console.log('Header is',authorizationHeader);
               // make another request to fetch the org and user id
               $.ajax({
                 //url: instanceURL+ '/services/apexrest/organduserdetails/',
