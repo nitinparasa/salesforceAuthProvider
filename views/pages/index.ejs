@@ -11,7 +11,7 @@
   <div class="container">
     <div class="row">
       <div class="col-md-12 text-center ">
-          <a id="salesforceLoginBtn" class="btn btn-primary" href="/sflogin" id="salesforceLoginBtn">Login with Salesforce</a>
+          <a id="salesforceLoginBtn" class="btn btn-primary" href="https://login.salesforce.com/services/oauth2/authorize?response_type=code&client_id=3MVG9YDQS5WtC11qkyOS6M6DQY99CEesL6Mdf0xzUGG8bD8o0a4CCnkxZjn4ut5cd4o9mjihGRubfypmGyEGj&redirect_uri=https://salesforceauthmock.herokuapp.com/" id="salesforceLoginBtn">Login with Salesforce</a>
           <img width="300px" height="200px" src='' id="profilePic" alt="Profile Picture"/>
           <h3 id="salesforceUsername"></h3>
           <p class="text-muted" id="salesforceUserId"></p>
@@ -27,85 +27,7 @@
   <% let sfUId = salesforce_user_id%>
   <% let profilePicUrl = salesforce_profilePicURL %>
   <% let sfOrgId = salesforce_org_id %>
-  <script>
-
-      $(document).ready(function(e){
-        let currentHref = parent.window.location.href;
-        console.log(currentHref);
-        if(currentHref !== undefined){
-          if(currentHref.includes('code')){
-            const code = decodeURIComponent(currentHref.slice(currentHref.indexOf('=')+1));
-            const payload = {
-              grant_type: 'authorization_code',
-              code,
-              client_id: '<%= client_id %>',
-              client_secret: '<%= client_secret %>',
-              redirect_uri: 'https://salesforceauthmock.herokuapp.com/' 
-            };
-            $.ajax({
-              url: 'https://login.salesforce.com/services/oauth2/token',
-              method: 'POST', 
-              crossdomain: true,
-              headers: {
-                "Content-Type":"application/x-www-form-urlencoded",
-              },
-              dataType: 'json',
-              data: payload
-            })
-            .done(function(response){ 
-              console.log(response); 
-              const accessToken = response.access_token;
-              const refreshToken = response.refresh_token;
-              const instanceURL = response.instance_url;
-              const userInfoEndPoint = response.id;
-          
-              // make another request to fetch the org and user id
-              /*var settings = {
-                "async": true,
-                "crossDomain": true,
-                "url": userInfoEndPoint,
-                "method": "GET",
-                "headers": {
-                  "Authorization": "Bearer " + accessToken,
-                  "cache-control": "no-cache"
-                }
-              }
-              
-              $.ajax(settings).done(function (response) {
-                console.log(response);
-                //window.location.href = 'https://salesforceauthmock.herokuapp.com/success?response='+JSON.stringify(response);
-              }); */
-
-              var data = null;
-
-              var xhr = new XMLHttpRequest();
-              //xhr.withCredentials = true;
-
-              xhr.addEventListener("readystatechange", function () {
-                if (this.readyState === 4) {
-                  console.log(this.responseText);
-                }
-              });
-
-              xhr.open("GET", userInfoEndPoint+"/");
-              xhr.setRequestHeader("Authorization", "Bearer "+ accessToken);
-              xhr.setRequestHeader("cache-control", "no-cache");
-              xhr.setRequestHeader("");
-              //xhr.setRequestHeader("Postman-Token", "bffe3993-06c9-4399-a369-0d29ff671868");
-
-              xhr.send(data);
-            });
-          } else if(currentHref.includes('successs')){
-            document.querySelector('#salesforceLoginBtn').style.display = 'none';
-            document.querySelector('#profilePic').setAttribute('src', '<%= profilePicUrl %>');
-            document.querySelector('#salesforceUsername').innerText = ('<%= sfUname %>' !== undefined) ? '<%= sfUname %>': '';
-            document.querySelector('#salesforceUserId').innerText = ('<%= sfUId %>' !== undefined) ? '<%= sfUId %>': '';
-            document.querySelector('#salesforceOrgId').innerText = ('<%= sfOrgId %>' !== undefined) ? '<%= sfOrgId %>': '';
-          }
-        }
-      });
-
-  </script>
+  
 </body>
 </html>
 

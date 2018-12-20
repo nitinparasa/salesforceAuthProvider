@@ -30,24 +30,22 @@ app.get('/', (req, res) => {
 })
 
 // initial callout to get the authorization code
-app.get('/sflogin', function(req,res){
-    var url = new URL("https://login.salesforce.com/services/oauth2/authorize"),
-    params = {response_type:'code', client_id:'3MVG9YDQS5WtC11qkyOS6M6DQY99CEesL6Mdf0xzUGG8bD8o0a4CCnkxZjn4ut5cd4o9mjihGRubfypmGyEGj',redirect_uri:'https://salesforceauthmock.herokuapp.com/'}
-    
-    url.search = new URLSearchParams(params)
+app.get('/callback', function(req,res){
+    const authCode = req.params.code;
+    console.log('Auth code is',authCode); 
 
-    fetch(url)
-    .then(res => res.json())
-    .then(json => console.log(json));
-    res.render('pages/index',{
-        salesforce_client_id: process.env.CLIENT_ID,
-    salesforce_client_secret: process.env.CLIENT_SECRET,
-    salesforce_user_name: '',
-    salesforce_user_id: '',
-    //salesforce_org_name: '',
-    salesforce_profilePicURL: '',
-    salesforce_org_id: ''
-    });
+    // fetch(url)
+    // .then(res => res.json())
+    // .then(json => console.log(json));
+    // res.render('pages/index',{
+    //     salesforce_client_id: process.env.CLIENT_ID,
+    // salesforce_client_secret: process.env.CLIENT_SECRET,
+    // salesforce_user_name: '',
+    // salesforce_user_id: '',
+    // //salesforce_org_name: '',
+    // salesforce_profilePicURL: '',
+    // salesforce_org_id: ''
+    // });
 
 })
 
