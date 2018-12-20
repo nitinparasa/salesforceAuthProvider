@@ -78,7 +78,7 @@ app.get('/callback', function(req,res){
     .then(res => res.json())
     .then(data => {
         console.log(data);
-        res.redirect('pages/index/success?response='+data);
+        res.redirect('/success?response='+data);
     })
     .catch(error => console.error(error));
   
