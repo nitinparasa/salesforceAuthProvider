@@ -29,24 +29,47 @@ app.get('/', (req, res) => {
 })
 })
 
-// initial callout to get the authorization code
+// autho Code callback from salesforce and request for accessToken
 app.get('/callback', function(req,res){
     const authCode = req.query.code;
     console.log('Auth code is',authCode); 
 
-    // fetch(url)
-    // .then(res => res.json())
-    // .then(json => console.log(json));
-    // res.render('pages/index',{
-    //     salesforce_client_id: process.env.CLIENT_ID,
-    // salesforce_client_secret: process.env.CLIENT_SECRET,
-    // salesforce_user_name: '',
-    // salesforce_user_id: '',
-    // //salesforce_org_name: '',
-    // salesforce_profilePicURL: '',
-    // salesforce_org_id: ''
-    // });
 
+    const payload = {
+        grant_type: 'authorization_code',
+        code,
+        client_id: '<%= client_id %>',
+        client_secret: '<%= client_secret %>',
+        redirect_uri: 'https://salesforceauthmock.herokuapp.com/callback'
+    };
+
+    postData(`https://login.salesforce.com/services/oauth2/token`, payload)
+    .then(data => console.log(JSON.stringify(data))) // JSON-string from `response.json()` call
+    .catch(error => console.error(error));
+
+    function postData(url = ``, data = {}) {
+        return fetch(url, {
+            method: "POST", 
+            mode: "cors", 
+            cache: "no-cache", 
+            credentials: "include", 
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded"
+            },
+            redirect: "follow", // manual, *follow, error
+            body: data, // body data type must match "Content-Type" header
+        })
+        .then(response => response.json()); // parses response to JSON
+    }  
+    res.render('pages/index',{
+    salesforce_client_id: process.env.CLIENT_ID,
+    salesforce_client_secret: process.env.CLIENT_SECRET,
+    salesforce_user_name: '',
+    salesforce_user_id: '',
+    //salesforce_org_name: '',
+    salesforce_profilePicURL: '',
+    salesforce_org_id: ''
+    });
 })
 
 app.get('/success', (req, res) => {
