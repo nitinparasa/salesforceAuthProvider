@@ -78,7 +78,7 @@ app.get('/callback', function(req,res){
     .then(res => res.json())
     .then(data => {
         console.log(data);
-        res.redirect('/success?response='+data);
+        res.redirect('/success?response='+JSON.stringify(data));
         
     })
     .catch(error => console.error(error));
@@ -93,7 +93,7 @@ app.get('/callback', function(req,res){
 })
 
 app.get('/success', (req, res) => {
-    const responseRetrieved = req.query.response;
+    const responseRetrieved = JSON.parse(req.query.response);
     const userName = responseRetrieved.name;
     const userId = responseRetrieved.user_id;
     //const orgName = responseRetrieved.;
