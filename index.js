@@ -61,6 +61,7 @@ app.get('/callback', function(req,res){
         const fetchedOrgId = data.id.substring(data.id.indexOf('id') + 3,data.id.lastIndexOf('/'))
         const fetchedUserId = data.id.substring(data.id.lastIndexOf('/')+1)
 
+        console.log('Fethched user id and org id are',fetchedUserId,fetchedOrgId);
         // call to fetch user info 
         fetch(`${data.instance_url}/services/oauth2/userinfo`, {
             method: "GET", 
@@ -74,7 +75,7 @@ app.get('/callback', function(req,res){
         })
         .then(res => res.json())
         .then(data => {
-
+            console.log('Data is',data);
         })
         .catch(err => console.log(`houston, we have a problem ${err}`));
     })
