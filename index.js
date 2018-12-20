@@ -1,4 +1,5 @@
 const express = require('express')
+const fetch = require('node-fetch');
 const path = require('path')
 const PORT = process.env.PORT || 5000
 
@@ -35,7 +36,9 @@ app.get('/sflogin', function(){
     
     url.search = new URLSearchParams(params)
 
-    fetch(url).then(data => console.log(JSON.stringify(data)));
+    fetch(url)
+    .then(res => res.json())
+    .then(json => console.log(json));
 
 })
 
