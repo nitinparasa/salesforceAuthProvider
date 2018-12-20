@@ -30,7 +30,7 @@ app.get('/', (req, res) => {
 })
 
 // initial callout to get the authorization code
-app.get('/sflogin', function(){
+app.get('/sflogin', function(req,res){
     var url = new URL("https://login.salesforce.com/services/oauth2/authorize"),
     params = {response_type:'code', client_id:'3MVG9YDQS5WtC11qkyOS6M6DQY99CEesL6Mdf0xzUGG8bD8o0a4CCnkxZjn4ut5cd4o9mjihGRubfypmGyEGj',redirect_uri:'https://salesforceauthmock.herokuapp.com/'}
     
