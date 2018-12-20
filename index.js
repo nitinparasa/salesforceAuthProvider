@@ -19,8 +19,6 @@ app.set('view engine', 'ejs')
 app.get('/', (req, res) => {
     console.log('enter');
     res.render('pages/index',{ 
-    salesforce_client_id: process.env.CLIENT_ID,
-    salesforce_client_secret: process.env.CLIENT_SECRET,
     salesforce_user_name: '',
     salesforce_user_id: '',
     //salesforce_org_name: '',
@@ -38,8 +36,8 @@ app.get('/callback', function(req,res){
     const payload = {
         grant_type: 'authorization_code',
         code: authCode,
-        client_id: '<%= client_id %>',
-        client_secret: '<%= client_secret %>',
+        client_id: process.env.CLIENT_ID,
+        client_secret: process.env.CLIENT_SECRET,
         redirect_uri: 'https://salesforceauthmock.herokuapp.com/callback'
     };
 
@@ -62,8 +60,6 @@ app.get('/callback', function(req,res){
         .then(response => response.json()); // parses response to JSON
     }  
     res.render('pages/index',{
-    salesforce_client_id: process.env.CLIENT_ID,
-    salesforce_client_secret: process.env.CLIENT_SECRET,
     salesforce_user_name: '',
     salesforce_user_id: '',
     //salesforce_org_name: '',
