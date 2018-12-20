@@ -6,6 +6,11 @@ var app = express()
 
 /* Middleware */
 app.use(express.static(path.join(__dirname, 'public')))
+app.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+})
 app.set('views', path.join(__dirname, 'views'))
 app.set('view engine', 'ejs')
   
@@ -21,6 +26,17 @@ app.get('/', (req, res) => {
     salesforce_profilePicURL: '',
     salesforce_org_id: ''
 })
+})
+
+// initial callout to get the authorization code
+app.get('/sflogin', function(){
+    var url = new URL("https://login.salesforce.com/services/oauth2/authorize"),
+    params = {response_type:'code', client_id:'3MVG9YDQS5WtC11qkyOS6M6DQY99CEesL6Mdf0xzUGG8bD8o0a4CCnkxZjn4ut5cd4o9mjihGRubfypmGyEGj',redirect_uri:'https://salesforceauthmock.herokuapp.com/'}
+    
+    url.search = new URLSearchParams(params)
+
+    fetch(url).then(data => console.log(JSON.stringify(data)));
+
 })
 
 app.get('/success', (req, res) => {

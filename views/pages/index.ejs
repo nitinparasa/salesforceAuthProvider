@@ -11,7 +11,7 @@
   <div class="container">
     <div class="row">
       <div class="col-md-12 text-center ">
-          <a id="salesforceLoginBtn" class="btn btn-primary" href="https://login.salesforce.com/services/oauth2/authorize?response_type=code&client_id=3MVG9YDQS5WtC11qkyOS6M6DQY99CEesL6Mdf0xzUGG8bD8o0a4CCnkxZjn4ut5cd4o9mjihGRubfypmGyEGj&redirect_uri=https://salesforceauthmock.herokuapp.com/" id="salesforceLoginBtn">Login with Salesforce</a>
+          <a id="salesforceLoginBtn" class="btn btn-primary" href="/sflogin" id="salesforceLoginBtn">Login with Salesforce</a>
           <img width="300px" height="200px" src='' id="profilePic" alt="Profile Picture"/>
           <h3 id="salesforceUsername"></h3>
           <p class="text-muted" id="salesforceUserId"></p>
@@ -90,7 +90,8 @@
               xhr.open("GET", userInfoEndPoint+"/");
               xhr.setRequestHeader("Authorization", "Bearer "+ accessToken);
               xhr.setRequestHeader("cache-control", "no-cache");
-              xhr.setRequestHeader("Postman-Token", "bffe3993-06c9-4399-a369-0d29ff671868");
+              xhr.setRequestHeader("");
+              //xhr.setRequestHeader("Postman-Token", "bffe3993-06c9-4399-a369-0d29ff671868");
 
               xhr.send(data);
             });
