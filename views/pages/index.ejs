@@ -25,7 +25,25 @@
   <% let sfUId = salesforce_user_id%>
   <% let profilePicUrl = salesforce_profilePicURL %>
   <% let sfOrgId = salesforce_org_id %>
-  
+  <script>
+
+    $(document).ready(function(e){
+      let currentHref = parent.window.location.href;
+      console.log(currentHref);
+      if(currentHref !== undefined){
+        if(currentHref.includes('code')){
+          
+        } else if(currentHref.includes('successs')){
+          document.querySelector('#salesforceLoginBtn').style.display = 'none';
+          document.querySelector('#profilePic').setAttribute('src', '<%= profilePicUrl %>');
+          document.querySelector('#salesforceUsername').innerText = ('<%= sfUname %>' !== undefined) ? '<%= sfUname %>': '';
+          document.querySelector('#salesforceUserId').innerText = ('<%= sfUId %>' !== undefined) ? '<%= sfUId %>': '';
+          document.querySelector('#salesforceOrgId').innerText = ('<%= sfOrgId %>' !== undefined) ? '<%= sfOrgId %>': '';
+        }
+      }
+    });
+
+</script>
 </body>
 </html>
 
