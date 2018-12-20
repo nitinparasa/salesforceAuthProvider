@@ -31,7 +31,7 @@ app.get('/', (req, res) => {
 
 // initial callout to get the authorization code
 app.get('/callback', function(req,res){
-    const authCode = req.params.code;
+    const authCode = req.query.code;
     console.log('Auth code is',authCode); 
 
     // fetch(url)
