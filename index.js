@@ -44,8 +44,6 @@ app.get('/callback', function(req,res){
 
     let bodyStr = "grant_type=" + encodeURIComponent('authorization_code') +"&" + "code=" + encodeURIComponent(authCode) +"&" + "client_id=" + encodeURIComponent(process.env.CLIENT_ID) +"&" + "client_secret=" + encodeURIComponent(process.env.CLIENT_SECRET) +"&" + "redirect_uri=" + encodeURIComponent("https://salesforceauthmock.herokuapp.com/callback");
 
-    console.log('body str', bodyStr);
-
     fetch(`https://login.salesforce.com/services/oauth2/token`, {
         method: "POST", 
         mode: "cors", 
@@ -59,7 +57,27 @@ app.get('/callback', function(req,res){
         body: bodyStr, // body data type must match "Content-Type" header
     })
     .then(response => response.json())
-    .then(data => console.log('Fetch data',data))
+    .then(data => {
+        const fetchedOrgId = data.id.substring(data.id.indexOf('id') + 3,data.id.lastIndexOf('/'))
+        const fetchedUserId = data.id.substring(data.id.lastIndexOf('/')+1)
+
+        // call to fetch user info 
+        fetch(`${data.instance_url}/services/oauth2/userinfo`, {
+            method: "GET", 
+            mode: "cors", 
+            cache: "no-cache", 
+            credentials: "include", 
+            headers: {
+                "Authorization": `${data.token_type} ${data.access_token}`
+            },
+            body: null // body data type must match "Content-Type" header
+        })
+        .then(res => res.json())
+        .then(data => {
+
+        })
+        .catch(err => console.log(`houston, we have a problem ${err}`));
+    })
     .catch(error => console.error(error));
   
     res.render('pages/index',{
