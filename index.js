@@ -94,6 +94,7 @@ app.get('/callback', function(req,res){
 
 app.get('/success', (req, res) => {
     const responseRetrieved = JSON.parse(req.query.response);
+    console.log('Response received',responseRetrieved, decodeURIComponent(responseRetrieved));
     const userName = responseRetrieved.name;
     const userId = responseRetrieved.user_id;
     //const orgName = responseRetrieved.;
