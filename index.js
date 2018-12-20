@@ -37,7 +37,7 @@ app.get('/callback', function(req,res){
 
     const payload = {
         grant_type: 'authorization_code',
-        code,
+        code: authCode,
         client_id: '<%= client_id %>',
         client_secret: '<%= client_secret %>',
         redirect_uri: 'https://salesforceauthmock.herokuapp.com/callback'
