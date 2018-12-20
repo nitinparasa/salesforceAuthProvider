@@ -75,7 +75,7 @@ app.get('/callback', function(req,res){
         })
         .then(res => res.json())
         .then(data => {
-            console.log('Data is',data);
+            res.redirect('pages/index/sucess?response='+data);
         })
         .catch(err => console.log(`houston, we have a problem ${err}`));
     })
