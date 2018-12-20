@@ -71,13 +71,14 @@ app.get('/callback', function(req,res){
             headers: {
                 "Authorization": `${data.token_type} ${data.access_token}`
             },
+            redirect: "manual",
             body: null // body data type must match "Content-Type" header
         })
     })
     .then(res => res.json())
     .then(data => {
         console.log(data);
-        //return res.redirect('pages/index/success?response='+data);
+        res.redirect('pages/index/success?response='+data);
     })
     .catch(error => console.error(error));
   
