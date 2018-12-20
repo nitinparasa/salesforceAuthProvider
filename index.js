@@ -39,7 +39,15 @@ app.get('/sflogin', function(req,res){
     fetch(url)
     .then(res => res.json())
     .then(json => console.log(json));
-    res.render('pages/index');
+    res.render('pages/index',{
+        salesforce_client_id: process.env.CLIENT_ID,
+    salesforce_client_secret: process.env.CLIENT_SECRET,
+    salesforce_user_name: '',
+    salesforce_user_id: '',
+    //salesforce_org_name: '',
+    salesforce_profilePicURL: '',
+    salesforce_org_id: ''
+    });
 
 })
 
