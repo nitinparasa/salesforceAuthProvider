@@ -1,5 +1,6 @@
 const express = require('express')
 const fetch = require('node-fetch');
+var URLSearchParams = require('url-search-params');
 var FormData = require('form-data');
 const path = require('path')
 const PORT = process.env.PORT || 5000
@@ -39,7 +40,7 @@ app.get('/callback', function(req,res){
     payload.append("client_id",process.env.CLIENT_ID );
     payload.append("client_secret", process.env.CLIENT_SECRET);
     payload.append("redirect_uri", "https://salesforceauthmock.herokuapp.com/callback");
-    console.log(payload);
+    console.log(new URLSearchParams(payload));
 
     fetch(`https://login.salesforce.com/services/oauth2/token`, {
         method: "POST", 
@@ -50,7 +51,7 @@ app.get('/callback', function(req,res){
             "Content-Type": "application/x-www-form-urlencoded"
         },
         redirect: "follow", // manual, *follow, error
-        body: payload, // body data type must match "Content-Type" header
+        body: new URLSearchParams(payload), // body data type must match "Content-Type" header
     })
     .then(response => response.json())
     .then(data => console.log('Fetch data',data))
