@@ -42,7 +42,7 @@ app.get('/callback', function(req,res){
     // payload.append("redirect_uri", "https://salesforceauthmock.herokuapp.com/callback");
     // console.log(new URLSearchParams(payload));
 
-    let bodyStr = "grant_type=" + encodeURIComponent(authorization_code) +"&" + "code=" + encodeURIComponent(authCode) +"&" + "client_id=" + encodeURIComponent(process.env.CLIENT_ID) +"&" + "client_secret=" + encodeURIComponent(process.env.CLIENT_SECRET) +"&" + "redirect_uri=" + encodeURIComponent("https://salesforceauthmock.herokuapp.com/callback");
+    let bodyStr = "grant_type=" + encodeURIComponent('authorization_code') +"&" + "code=" + encodeURIComponent(authCode) +"&" + "client_id=" + encodeURIComponent(process.env.CLIENT_ID) +"&" + "client_secret=" + encodeURIComponent(process.env.CLIENT_SECRET) +"&" + "redirect_uri=" + encodeURIComponent("https://salesforceauthmock.herokuapp.com/callback");
 
     console.log('body str', bodyStr);
 
