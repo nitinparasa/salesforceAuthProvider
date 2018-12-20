@@ -34,13 +34,17 @@ app.get('/callback', function(req,res){
     const authCode = req.query.code;
     console.log('Auth code is',authCode); 
 
-    var payload = new FormData();
-    payload.append("grant_type", "authorization_code");
-    payload.append("code", authCode);
-    payload.append("client_id",process.env.CLIENT_ID );
-    payload.append("client_secret", process.env.CLIENT_SECRET);
-    payload.append("redirect_uri", "https://salesforceauthmock.herokuapp.com/callback");
-    console.log(new URLSearchParams(payload));
+    // var payload = new FormData();
+    // payload.append("grant_type", "authorization_code");
+    // payload.append("code", authCode);
+    // payload.append("client_id",process.env.CLIENT_ID );
+    // payload.append("client_secret", process.env.CLIENT_SECRET);
+    // payload.append("redirect_uri", "https://salesforceauthmock.herokuapp.com/callback");
+    // console.log(new URLSearchParams(payload));
+
+    let bodyStr = "grant_type=" + encodeURIComponent(authorization_code) +"&" + "code=" + encodeURIComponent(authCode) +"&" + "client_id=" + encodeURIComponent(process.env.CLIENT_ID) +"&" + "client_secret=" + encodeURIComponent(process.env.CLIENT_SECRET) +"&" + "redirect_uri=" + encodeURIComponent("https://salesforceauthmock.herokuapp.com/callback");
+
+    console.log('body str', bodyStr);
 
     fetch(`https://login.salesforce.com/services/oauth2/token`, {
         method: "POST", 
@@ -48,10 +52,11 @@ app.get('/callback', function(req,res){
         cache: "no-cache", 
         credentials: "include", 
         headers: {
+            "Accept": 'application/json',
             "Content-Type": "application/x-www-form-urlencoded"
         },
         redirect: "follow", // manual, *follow, error
-        body: new URLSearchParams(payload), // body data type must match "Content-Type" header
+        body: bodyStr, // body data type must match "Content-Type" header
     })
     .then(response => response.json())
     .then(data => console.log('Fetch data',data))
