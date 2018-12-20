@@ -78,17 +78,18 @@ app.get('/callback', function(req,res){
     .then(res => res.json())
     .then(data => {
         console.log(data);
-        res.redirect('/success?response='+data);
+        //res.redirect('/success?response='+data);
+        
     })
     .catch(error => console.error(error));
   
-    res.render('pages/index',{
-    salesforce_user_name: '',
-    salesforce_user_id: '',
-    //salesforce_org_name: '',
-    salesforce_profilePicURL: '',
-    salesforce_org_id: ''
-    });
+    // res.render('pages/index',{
+    // salesforce_user_name: '',
+    // salesforce_user_id: '',
+    // //salesforce_org_name: '',
+    // salesforce_profilePicURL: '',
+    // salesforce_org_id: ''
+    // });
 })
 
 app.get('/success', (req, res) => {
