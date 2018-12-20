@@ -41,24 +41,20 @@ app.get('/callback', function(req,res){
         redirect_uri: 'https://salesforceauthmock.herokuapp.com/callback'
     };
 
-    postData(`https://login.salesforce.com/services/oauth2/token`, payload)
-    .then(data => console.log(JSON.stringify(data))) // JSON-string from `response.json()` call
+    fetch(`https://login.salesforce.com/services/oauth2/token`, {
+        method: "POST", 
+        mode: "cors", 
+        cache: "no-cache", 
+        credentials: "include", 
+        headers: {
+            "Content-Type": "application/x-www-form-urlencoded"
+        },
+        redirect: "follow", // manual, *follow, error
+        body: payload, // body data type must match "Content-Type" header
+    })
+    .then(response => response.json())
     .catch(error => console.error(error));
-
-    function postData(url = ``, data = {}) {
-        return fetch(url, {
-            method: "POST", 
-            mode: "cors", 
-            cache: "no-cache", 
-            credentials: "include", 
-            headers: {
-                "Content-Type": "application/x-www-form-urlencoded"
-            },
-            redirect: "follow", // manual, *follow, error
-            body: data, // body data type must match "Content-Type" header
-        })
-        .then(response => response.json()); // parses response to JSON
-    }  
+  
     res.render('pages/index',{
     salesforce_user_name: '',
     salesforce_user_id: '',
