@@ -32,13 +32,12 @@ app.get('/callback', function(req,res){
     const authCode = req.query.code;
     console.log('Auth code is',authCode); 
 
-    const payload = {
-        grant_type: 'authorization_code',
-        code: authCode,
-        client_id: process.env.CLIENT_ID,
-        client_secret: process.env.CLIENT_SECRET,
-        redirect_uri: 'https://salesforceauthmock.herokuapp.com/callback'
-    };
+    var payload = new FormData();
+    payload.append("grant_type", "authorization_code");
+    payload.append("code", authCode);
+    payload.append("client_id",process.env.CLIENT_ID );
+    payload.append("client_secret", process.env.CLIENT_SECRET);
+    payload.append("redirect_uri", "https://salesforceauthmock.herokuapp.com/callback");
     console.log(payload);
 
     fetch(`https://login.salesforce.com/services/oauth2/token`, {
