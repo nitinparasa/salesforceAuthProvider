@@ -63,7 +63,7 @@ app.get('/callback', function(req,res){
 
         console.log('Fethched user id and org id are',fetchedUserId,fetchedOrgId);
         // call to fetch user info 
-        fetch(`${data.instance_url}/services/oauth2/userinfo`, {
+        return fetch(`${data.instance_url}/services/oauth2/userinfo`, {
             method: "GET", 
             mode: "cors", 
             cache: "no-cache", 
@@ -73,11 +73,10 @@ app.get('/callback', function(req,res){
             },
             body: null // body data type must match "Content-Type" header
         })
-        .then(res => res.json())
-        .then(data => {
-            res.redirect('pages/index/sucess?response='+data);
-        })
-        .catch(err => console.log(`houston, we have a problem ${err}`));
+    })
+    .then(res => res.json())
+    .then(data => {
+        res.redirect('pages/index/success?response='+data);
     })
     .catch(error => console.error(error));
   
