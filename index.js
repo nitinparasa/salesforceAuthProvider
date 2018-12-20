@@ -39,6 +39,7 @@ app.get('/sflogin', function(){
     fetch(url)
     .then(res => res.json())
     .then(json => console.log(json));
+    res.render('pages/index');
 
 })
 
