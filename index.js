@@ -19,7 +19,6 @@ app.set('view engine', 'ejs')
   
 /* Routing */  
 app.get('/', (req, res) => {
-    console.log('enter');
     res.render('pages/index',{ 
     salesforce_user_name: '',
     salesforce_user_id: '',
@@ -29,18 +28,10 @@ app.get('/', (req, res) => {
 })
 })
 
-// autho Code callback from salesforce and request for accessToken
+// auth Code callback from salesforce and request for accessToken
 app.get('/callback', function(req,res){
     const authCode = req.query.code;
-    console.log('Auth code is',authCode); 
-
-    // var payload = new FormData();
-    // payload.append("grant_type", "authorization_code");
-    // payload.append("code", authCode);
-    // payload.append("client_id",process.env.CLIENT_ID );
-    // payload.append("client_secret", process.env.CLIENT_SECRET);
-    // payload.append("redirect_uri", "https://salesforceauthmock.herokuapp.com/callback");
-    // console.log(new URLSearchParams(payload));
+    console.log('Auth code is',authCode);
 
     let bodyStr = "grant_type=" + encodeURIComponent('authorization_code') +"&" + "code=" + encodeURIComponent(authCode) +"&" + "client_id=" + encodeURIComponent(process.env.CLIENT_ID) +"&" + "client_secret=" + encodeURIComponent(process.env.CLIENT_SECRET) +"&" + "redirect_uri=" + encodeURIComponent("https://salesforceauthmock.herokuapp.com/callback");
 
@@ -77,19 +68,9 @@ app.get('/callback', function(req,res){
     })
     .then(res => res.json())
     .then(data => {
-        //console.log(data);
         res.redirect('/success?response='+JSON.stringify(data));
-        
     })
     .catch(error => console.error(error));
-  
-    // res.render('pages/index',{
-    // salesforce_user_name: '',
-    // salesforce_user_id: '',
-    // //salesforce_org_name: '',
-    // salesforce_profilePicURL: '',
-    // salesforce_org_id: ''
-    // });
 })
 
 app.get('/success', (req, res) => {
