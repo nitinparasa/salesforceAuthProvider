@@ -19,7 +19,7 @@
           <a id="salesforceLoginBtn" class="btn" href="https://login.salesforce.com/services/oauth2/authorize?response_type=code&client_id=3MVG9YDQS5WtC11qkyOS6M6DQY99CEesL6Mdf0xzUGG8bD8o0a4CCnkxZjn4ut5cd4o9mjihGRubfypmGyEGj&redirect_uri=https://salesforceauthmock.herokuapp.com/callback" id="salesforceLoginBtn" style="background-color: #00A1DF; color: white;"> <i class="fas fa-cloud"></i> Log in with Salesforce</a>
           
           <% if(sfUname != '') { %>
-          <img width="300px" height="200px" src='' id="profilePic" alt="Profile Picture"style="display: block;"/>
+          <img width="300px" height="200px" src='' id="profilePic" alt="Profile Picture"style="display: block;margin-left:auto;margin-right: auto;"/>
           <h3 id="salesforceUsername">Username: </h3>
           <p class="text-muted" id="salesforceUserId">User ID: </p>
           <p class="text-muted" id="salesforceOrgId">Organization ID: </p>
@@ -38,9 +38,9 @@
         } else if(currentHref.includes('success')){
           document.querySelector('#salesforceLoginBtn').style.display = 'none';
           document.querySelector('#profilePic').setAttribute('src', '<%= profilePicUrl %>');
-          document.querySelector('#salesforceUsername').innerText += ('<%= sfUname %>' !== undefined) ? '<%= sfUname %>': '';
-          document.querySelector('#salesforceUserId').innerText += ('<%= sfUId %>' !== undefined) ? '<%= sfUId %>': '';
-          document.querySelector('#salesforceOrgId').innerText += ('<%= sfOrgId %>' !== undefined) ? '<%= sfOrgId %>': '';
+          document.querySelector('#salesforceUsername').innerText += '' + ('<%= sfUname %>' !== undefined) ? '<%= sfUname %>': '';
+          document.querySelector('#salesforceUserId').innerText += '' + ('<%= sfUId %>' !== undefined) ? '<%= sfUId %>': '';
+          document.querySelector('#salesforceOrgId').innerText += '' + ('<%= sfOrgId %>' !== undefined) ? '<%= sfOrgId %>': '';
         }
       }
     });
